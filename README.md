@@ -2,6 +2,54 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Deployment Diagram
+
+                        +-----------------+
+                        |    GitHub Repo   |
+                        |                 |
+                        +-----------------+
+                                  |
+                                  | Trigger on push to main branch
+                                  |
+                                  v
+                        +-----------------+
+                        |  GitHub Actions |
+                        |                 |
+                        +-----------------+
+                                  |
+                                  | Checkout code
+                                  |
+                                  v
+                        +-----------------+
+                        |   Ubuntu VM     |
+                        |                 |
+                        +-----------------+
+                                  |
+                                  | Install Node.js
+                                  |
+                                  v
+                        +-----------------+
+                        |   npm install   |
+                        |                 |
+                        +-----------------+
+                                  |
+                                  | Build project
+                                  |
+                                  v
+                        +-----------------+
+                        |   Configure     |
+                        | AWS Credentials |
+                        +-----------------+
+                                  |
+                                  | Deploy to S3 bucket
+                                  |
+                                  v
+                        +-----------------+
+                        |    S3 Bucket    |
+                        |  (saferide-auth-|
+                        |    client)      |
+                        +-----------------+
+
 ## Available Scripts
 
 In the project directory, you can run:

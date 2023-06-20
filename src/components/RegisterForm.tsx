@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { register } from './client/safeRideApiClient';
+import { register } from '../client/safeRideApiClient';
+import { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [email, setEmail] = useState('');
@@ -8,6 +10,8 @@ const RegisterForm = () => {
   const [phone, setPhone] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [error, setError] = useState<AxiosError>();
+  const navigate = useNavigate();
 
   // const handleLoginChange = (e) => {
   //   const { email, password } = e.target.value;
@@ -31,8 +35,14 @@ const RegisterForm = () => {
       const response = await register(userProps);
       if (response) {
         console.log(response);
+        navigate('/login');
       }
-    } catch (err) {
+    } catch (err: any) {
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setError(err.response.data);
+      }
       console.error(err);
     }
     // implement backend logic
@@ -197,7 +207,11 @@ const RegisterForm = () => {
               />
             </div>
           </div>
-
+          <span className="text-sm text-red-600">
+            {error?.message
+              ? JSON.stringify(error.message)
+              : JSON.stringify(error)}{' '}
+          </span>
           <div>
             <button
               type="submit"

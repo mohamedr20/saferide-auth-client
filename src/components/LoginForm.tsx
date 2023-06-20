@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { login } from './client/safeRideApiClient';
+import React, { useState } from 'react';
+import { login } from '../client/safeRideApiClient';
+import { Link, useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [token, setToken] = useState('')
-
-  // const handleLoginChange = (e) => {
-  //   const { email, password } = e.target.value;
-  //   console.log(email, password)
-  //   setEmail(email);
-  //   setPassword(password)
-  // };
-  useEffect(() => {
-
-  }, [])
+  const [error, setErrors] = useState<AxiosError>();
+  const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const response = await login(email, password)
-      if(response){
-        console.log(response.data)
+    try {
+      const response = await login(email, password);
+      if (response) {
+        console.log(response.data.data);
+        // set the user
+        navigate(`/user/profile`);
       }
+    } catch (err: any) {
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setErrors(err.response.data);
+      }
+      console.error(err);
     }
-    catch(err){
-      console.error(err)
-    }
-    // implement backend logic
   };
 
   return (
@@ -42,9 +40,13 @@ const LoginForm = () => {
           Sign in to your account
         </h2>
       </div>
-
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form onSubmit={handleLoginSubmit} className="space-y-6" action="#" method="POST">
+        <form
+          onSubmit={handleLoginSubmit}
+          className="space-y-6"
+          action="#"
+          method="POST"
+        >
           <div>
             <label
               htmlFor="email"
@@ -96,7 +98,11 @@ const LoginForm = () => {
               />
             </div>
           </div>
-
+          <span className="text-sm text-red-600">
+            {error?.message
+              ? JSON.stringify(error.message)
+              : JSON.stringify(error)}{' '}
+          </span>
           <div>
             <button
               type="submit"
@@ -105,6 +111,12 @@ const LoginForm = () => {
               Sign in
             </button>
           </div>
+          <p className="mt-4 text-center text-gray-500 text-sm">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-indigo-600">
+              Register now
+            </Link>
+          </p>
         </form>
       </div>
     </div>
