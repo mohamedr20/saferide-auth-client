@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Deployment Diagram
 
+Url for public S3 bucket: http://saferide-auth-client.s3-website.us-east-2.amazonaws.com/
+
                         +-----------------+
                         |    GitHub Repo   |
                         |                 |

@@ -7,8 +7,7 @@ const HomePage = () => {
       <div className="max-w-md bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">Welcome to the Safe Ride Auth Client</h2>
         <p className="text-gray-600 text-center mb-8">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet justo ac metus rutrum, eu laoreet nunc interdum. Fusce malesuada dapibus risus, ac feugiat elit tristique vel.
-        </p>
+        Your safety is our priority, and we understand the importance of reliable transportation services. With Safe Ride Auth Client, you can rest assured knowing that every journey is secure, convenient, and hassle-free.        </p>
         <div className="flex justify-center">
           <Link to="/login">
             <button className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
