@@ -5,8 +5,6 @@ on:
   push:
     branches:
       - main
-env:
-  REACT_APP_BASE_API_URL: 'http://ec2-52-91-210-105.compute-1.amazonaws.com:3000'
 jobs:
   # To build the project
   build-saferide:
